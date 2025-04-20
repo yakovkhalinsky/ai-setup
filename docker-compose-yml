@@ -1,0 +1,67 @@
+services:
+
+  ollama:
+    image: ollama/ollama
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "11434:11434"
+    volumes:
+      - "./ollama:/root/.ollama"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest  
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./open-webui:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+
+  searxng:
+    image: searxng/searxng:latest
+    ports:
+      - "8088:8080"
+    volumes:
+      - ./searxng/settings.yml:/etc/searxng/settings.yml
+    restart: always
+
+  comfyui:
+    build:
+      context: .
+      dockerfile: comfyui/Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./comfyui/models:/app/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+
+  # test:
+  #   image: nvidia/cuda:12.8.1-base-ubuntu24.04
+  #   command: nvidia-smi
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
