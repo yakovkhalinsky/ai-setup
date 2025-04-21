@@ -1,4 +1,5 @@
-comfyui/models/checkpoints
+comfyui/models
 comfyui/comfyui-src
 ollama
 open-webui
+venv
