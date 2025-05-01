@@ -11,19 +11,13 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy the cloned ComfyUI repository
-COPY ./comfyui/comfyui-src /app
-
-# Install Python dependencies
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# Clone and install ComfyUI Manager
-RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager && \
-    pip install -r /app/custom_nodes/ComfyUI-Manager/requirements.txt
-
-# Clone and install GGUF support for ComfyUI
-RUN git clone https://github.com/city96/ComfyUI-GGUF.git /app/custom_nodes/ComfyUI-GGUF && \
+# get comfyui source and install depedencies, manager and gguf support
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
+    pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager && \
+    pip install -r /app/custom_nodes/ComfyUI-Manager/requirements.txt && \
+    git clone https://github.com/city96/ComfyUI-GGUF.git /app/custom_nodes/ComfyUI-GGUF && \
     pip install --upgrade gguf
 
 # Expose the port used by ComfyUI
