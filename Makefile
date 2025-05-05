@@ -9,4 +9,4 @@ setup:
 
 .PHONY: up
 up:
-	docker compose up -d ollama open-webui comfyui
+	docker compose up -d ollama open-webui comfyui nginx
