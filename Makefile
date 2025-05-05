@@ -9,4 +9,4 @@ setup:
 
 .PHONY: up
 up:
-	docker compose up -d ollama open-webui searxng comfyui
+	docker compose up -d ollama open-webui comfyui

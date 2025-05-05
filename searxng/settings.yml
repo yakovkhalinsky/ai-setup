@@ -78,7 +78,7 @@ server:
   bind_address: '127.0.0.1'
   # public URL of the instance, to ensure correct inbound links. Is overwritten
   # by ${SEARXNG_URL}.
-  base_url: http://searxng:8088 # "http://example.com/location"
+  base_url: http://searxng:8080 # "http://example.com/location"
   limiter: false # rate limit the number of request on the instance, block some bots
   public_instance: false # enable features designed only for public instances
 
