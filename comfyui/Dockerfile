@@ -14,10 +14,12 @@ WORKDIR /app
 # get comfyui source and install depedencies, manager and gguf support
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
     pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager && \
-    pip install -r /app/custom_nodes/ComfyUI-Manager/requirements.txt && \
-    git clone https://github.com/city96/ComfyUI-GGUF.git /app/custom_nodes/ComfyUI-GGUF && \
+    pip install -r requirements.txt
+
+RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager && \
+    pip install -r /app/custom_nodes/ComfyUI-Manager/requirements.txt
+    
+RUN git clone https://github.com/city96/ComfyUI-GGUF.git /app/custom_nodes/ComfyUI-GGUF && \
     pip install --upgrade gguf
 
 # Expose the port used by ComfyUI
