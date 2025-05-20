@@ -10,3 +10,7 @@ setup:
 .PHONY: up
 up:
 	docker compose up -d open-webui n8n
+
+.PHONY: down
+down:
+	docker compose down
