@@ -1,6 +1,8 @@
 # Base image with Python 3.11 and CUDA 12.5 support
 FROM nvidia/cuda:12.8.1-runtime-ubuntu22.04
 
+ARG COMFYUI_VERSION=v0.3.33
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -12,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # get comfyui source and install depedencies, manager and gguf support
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
+RUN git clone -b ${COMFYUI_VERSION} https://github.com/comfyanonymous/ComfyUI.git . && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
