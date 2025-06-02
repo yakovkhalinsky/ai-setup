@@ -5,3 +5,4 @@ open-webui
 venv
 .env
 n8n_data/*
+bagel/models/*

@@ -9,8 +9,12 @@ setup:
 
 .PHONY: up
 up:
-	docker compose up -d open-webui n8n
+	docker compose up -d open-webui
 
 .PHONY: down
 down:
 	docker compose down
+
+.PHONY: services
+services:
+	docker compose up -d ollama comfyui

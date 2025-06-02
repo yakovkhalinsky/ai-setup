@@ -45,6 +45,16 @@ services:
     volumes:
       - ./comfyui/models:/app/models
 
+  bagel:
+    <<: [*gpu, *common]
+    build:
+      context: .
+      dockerfile: bagel/Dockerfile
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./bagel/models:/app/models
+
   db:
     <<: [*common]
     image: postgres:latest
